@@ -1,0 +1,18 @@
+.product-list{
+    flex: 4 !important;
+}
+
+
+.productListUser img{
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+.productListUser {
+    display: flex;
+    align-items: center;
+}

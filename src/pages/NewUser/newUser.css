@@ -1,0 +1,68 @@
+.newUser{
+    flex: 4;
+    padding: 20px;
+    
+}
+
+.newUserForm{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newUserItem{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.newUserItem > label {
+    font-size: 14px;
+    font-weight: 600;
+    color:gray;
+    margin-bottom: 10px;
+}
+
+.newUserItem input {
+    font-size: 14px;
+    padding: 11px;
+    border: 1px solid #DDD;
+    height: 22px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.newUserGender > label{
+    margin: 10px;
+    font-size: 18px;
+    color:#555;
+    
+}
+
+.newUserGender input {
+    position: relative;
+    top: 5px;
+}
+
+.newUserForm select {
+    height: 43px !important;
+    border: 1px solid #c5c5c5;
+    padding: 0 10px;
+    border-radius: 6px;
+    outline: none;
+    color: #767676;
+}
+
+
+button.userCreate {
+    padding: 13px 45px;
+    margin-top: 15px;
+    background: darkblue;
+    color: #FFF;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    cursor: pointer;
+}

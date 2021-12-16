@@ -1,0 +1,17 @@
+.chart {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: -2px 3px 9px -1px rgba(51,51,51,0.74);
+    -webkit-box-shadow: -1px 1px 9px -1px rgb(51 51 51 / 11%);
+    -moz-box-shadow: -2px 3px 9px -1px rgba(51,51,51,0.74);
+    border-radius: 6px;
+}
+
+.chat-title{
+    margin-bottom: 20px;
+}
+
+.homeWidget{
+    margin: 20px;
+    display: flex;
+}
