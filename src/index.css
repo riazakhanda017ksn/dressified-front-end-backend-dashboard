@@ -8,3 +8,54 @@ h1{
   margin: 0 !important;
 }
 
+.login{
+  background: linear-gradient(45deg,#000000bd,#000000bb),url(https://i.ibb.co/2qzHs2C/HOME-2.webp)no-repeat;
+  background-size: cover;
+  background-position: center 25%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-system {
+  width: 40%;
+  margin: 0 auto !important;
+ 
+}
+.login-system input::placeholder {
+  color: #fafafa !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+
+}
+.login-system input {
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+  padding: 18px 11px;
+  outline: none;
+  background: none;
+  border: 1px solid #ffffff91;
+  margin-bottom: 16px;
+  color: #fafafa;
+}
+
+.login-system button {
+  padding: 15px 41px;
+  font-size: 14px;
+  background: none;
+  border: 1px solid #fafafa9e;
+  outline: none;
+  color: #fafafad4;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transform-origin: top center;
+  transition: .3s ease-in-out;
+}
+
+.login-system button:hover{
+  background:#fafafad4 ;
+  color: black;
+}

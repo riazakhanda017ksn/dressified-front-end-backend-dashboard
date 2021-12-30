@@ -1,10 +1,30 @@
 import React from 'react'
 import './WidgetLg.css'
+import {useState,useEffect} from 'react'
+import { format } from 'timeago.js'
+import {userRequest} from '../../requestMethod'
 
 export default function WidgetLg() {
+    
     const Button =({type})=>{
         return <button className={'widgetLgButton '  + type}>{type}</button>
     }
+
+    const [orders,setOrders] = useState([])
+    useEffect(()=>{
+        const getUser = async () =>{
+         try{
+             const res = await userRequest.get('orders')
+             setOrders(res.data)
+             console.log('riaz ahmed aks',res.data);
+          }catch{}
+        }
+
+        getUser()
+    },[])
+
+
+
     return (
         <div className='widgetLg'>
             <h3 className="widgetLgTitle">
@@ -18,73 +38,28 @@ export default function WidgetLg() {
                  <th className="widgetLgTh">Status</th>
                 </tr>
                 {/* // */}
-                <tr className='widgetLgTr'>
+                {
+                    orders.map(order=>
+                         <tr className='widgetLgTr'>
                 <td className="widgetLgUser">
-                    <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" className="widgetLgImg" />
-                    <span className="widgetLgName">Susan Carol</span>
+                    <span className="widgetLgName">{order.userId}</span>
                 </td>
                 
                 <td className="widgetLgDate">
-                    2 Jun 2021
+                    {
+                       format (order.createdAt)
+                    }
                 </td>
                 <td className="widgetLgAmount">
-                    $ 122.00
+                    $ {order.amount}
                 </td>
                 <td className="widgetLgStatus">
-                   <Button type='approved'  />
+                   <Button type={order.status}  />
                 </td>
-                </tr>
-                {/* // */}
-                <tr className='widgetLgTr'>
-                <td className="widgetLgUser">
-                    <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" className="widgetLgImg" />
-                    <span className="widgetLgName">Susan Carol</span>
-                </td>
-                
-                <td className="widgetLgDate">
-                    2 Jun 2021
-                </td>
-                <td className="widgetLgAmount">
-                    $ 122.00
-                </td>
-                <td className="widgetLgStatus">
-                   <Button type='declined'  />
-                </td>
-                </tr>
-                {/* // */}
-                <tr className='widgetLgTr'>
-                <td className="widgetLgUser">
-                    <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" className="widgetLgImg" />
-                    <span className="widgetLgName">Susan Carol</span>
-                </td>
-                
-                <td className="widgetLgDate">
-                    2 Jun 2021
-                </td>
-                <td className="widgetLgAmount">
-                    $ 122.00
-                </td>
-                <td className="widgetLgStatus">
-                   <Button type='pending'  />
-                </td>
-                </tr>
-                {/* // */}
-                <tr className='widgetLgTr'>
-                <td className="widgetLgUser">
-                    <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="" className="widgetLgImg" />
-                    <span className="widgetLgName">Susan Carol</span>
-                </td>
-                
-                <td className="widgetLgDate">
-                    2 Jun 2021
-                </td>
-                <td className="widgetLgAmount">
-                    $ 122.00
-                </td>
-                <td className="widgetLgStatus">
-                   <Button type='pending'  />
-                </td>
-                </tr>
+                </tr> 
+                    )
+                }
+                       
             </table>
         </div>
     )

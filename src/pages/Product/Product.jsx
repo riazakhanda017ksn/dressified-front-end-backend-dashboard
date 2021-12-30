@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link,useLocation} from 'react-router-dom/cjs/react-router-dom.min'
 import Chart from '../../component/Chart/Chart'
 import './product.css'
 import {productData} from '../../dummyData'
 import { Publish } from '@material-ui/icons'
+import {useSelector} from 'react-redux'
 export default function Product() {
-    console.log('productData',productData);
+    const location = useLocation()
+    const productId = location.pathname.split('/')[2]
+    const product = useSelector((state)=>state.product.products.find((product)=>product._id === productId))
     return (
         <div className='product'>
            <div className="productTitleContainer">
@@ -22,8 +25,8 @@ export default function Product() {
                <div className="productTopRight">
                    <div className="productInfoTop"> 
                    <div className="productInfoBottom">
-                       <img src="https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="" className="productImg" />
-                       <span className="productName">Apple Airpods</span>
+                       <img src={product.img} alt="" className="productImg" />
+                       <span className="productName">{product.titlw}</span>
                    </div>
                    {/* /// */}
                    <div className="productInfoBottomItem">
@@ -31,7 +34,7 @@ export default function Product() {
                     <div className="productInfoItem">
                    <div className="productInfoKey">
                       <span className="productInfoKey">id:</span>
-                      <span className="productInfoValue">123</span>
+                      <span className="productInfoValue">{product._id}</span>
                    </div>
                </div>
                <div className="productInfoItem">
@@ -42,8 +45,8 @@ export default function Product() {
                </div>
                <div className="productInfoItem">
                    <div className="productInfoKey">
-                      <span className="productInfoKey">id:</span>
-                      <span className="productInfoValue">yes</span>
+                      <span className="productInfoKey">inStock:</span>
+                      <span className="productInfoValue">Yes</span>
                    </div>
                </div>
                <div className="productInfoItem">
@@ -62,21 +65,20 @@ export default function Product() {
          <form className="productForm">
             <div className="productFormLeft">
                 <label>Product Name</label>
-                <input type="text" name="" id="" />
+                <input type="text" name="" id="" placeholder={product.title}/>
+                <label>Product Description</label>
+                <input type="text" name="" id="" placeholder={product.desc}/>
+                <label>Product price</label>
+                <input type="text" name="" id="" placeholder={product.price}/>
                 <label>In Stock</label>
                 <select name='inStock' id='inStock'>
-                 <option value="yes">Yes</option>
-                 <option value="no">No</option>
-                </select>
-                <label>Active</label>
-                <select name='active' id='active'>
-                 <option value="yes">Yes</option>
-                 <option value="no">No</option>
+                 <option value="true">Yes</option>
+                 <option value="false">No</option>
                 </select>
             </div>
             <div className="productFormRight">
              <div className="productUpload">
-                 <img src="https://images.unsplash.com/photo-1610438235354-a6ae5528385c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWlycG9kc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60   " alt="" className="productUploadImg" />
+                 <img src={product.img} alt="" className="productUploadImg" />
                  <label htmlFor='file'>
                      <Publish/>
                  </label>

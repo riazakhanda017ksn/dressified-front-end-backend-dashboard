@@ -1,52 +1,52 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import './ProductList.css'
 import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { productRows } from '../../dummyData';
+ import {useDispatch, useSelector} from 'react-redux'
+import {  deleteProduct, getProducts } from '../../redux/apiCalls';
 
 export default function ProductList() {
-    const [data,setData]=useState(productRows)
-    const handleDelete =(id)=>{
-        setData(data.filter((item)=>item.id !== id))
-    }
+
+    const dispatch = useDispatch()
+    useEffect(()=>{
+      getProducts(dispatch)
+    },[dispatch])
+
+    const products = useSelector((state)=>state.product.products)
+      console.log('products', products);
+
+      const handleDelete = (id) => {
+        deleteProduct(id, dispatch);
+      };
+    
     //
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
+        { field: '_id', headerName: 'ID', width: 270 },
         {
           field: 'product',
           headerName: 'Product',
-          width: 200,
+          width: 230,
           editable: true,
           renderCell:(params)=>{
              return (
                   <div className='productListUser'>
                       <img src={params.row.img} alt="" />
                       {
-                          params.row.name
+                          params.row.title
                       }
                   </div>
              )
           } 
         },
-        {
-          field: 'stock',
-          headerName: 'Stock',
-          width: 180,
-          editable: true,
-        },
-        {
-          field: 'status',
-          headerName: 'status',
-          width: 150,
-          editable: true,
-        },
+      
+      
         {
           field: 'price',
           headerName: 'Price ',
           description: 'This column has a value getter and is not sortable.',
           sortable: false,
-          width: 180,
+          width: 220,
          
         },
         {
@@ -54,15 +54,18 @@ export default function ProductList() {
           headerName: 'Action',
           description: 'This column has a value getter and is not sortable.',
           sortable: false,
-          width: 150,
+          width: 220,
           renderCell:(params)=>{
             return (
                 <div className='userListEdit'>
-                    <Link to={`/product/`+params.row.id}>
+                    <Link to={`/product/`+params.row._id}>
                     <button >Edit</button>
                     </Link>
                     
-                   <DeleteOutline  onClick={()=>handleDelete(params.row.id)}   />
+                    <DeleteOutline
+              className="productListDelete"
+              onClick={() => handleDelete(params.row._id)}
+            />
                 </div>
             )
         }
@@ -71,9 +74,10 @@ export default function ProductList() {
     return (
         <div className='product-list'>
                       <DataGrid
-        rows={data}
+        rows={products}
         columns={columns}
         pageSize={8}
+        getRowId={(row)=>row._id}
         checkboxSelection
         disableSelectionOnClick 
       />
